@@ -8,36 +8,36 @@ int main() {
   std::cout << "Empty list: " << list->toString() << std::endl;
   //  removing from an empty list
   std::cout << "Removing from an empty list: " << list->remove(1)
-            << " expeceted: -1" << std::endl;
+            << " expected: -1" << std::endl;
   //  adding to an empty list
   list->add(1);
-  std::cout << "Empty list: " << list->toString() << std::endl;
+  std::cout << "Adding to an empty list: " <<  list->toString() << " expected: 1" << std::endl;
   //  removing the only element
   list->remove(1);
   std::cout << "Removing the only element: " << list->toString()
-            << "expeceted:" << std::endl;
+            << " expected:" << std::endl;
   //  adding to a list
   list->add(1);
   list->add(2);
   list->add(3);
   list->add(4);
   list->add(5);
-  std::cout << "added to a list: " << list->toString()
-            << "expeceted: 1, 2, 3, 4, 5" << std::endl;
-  // removing an elemt
+  std::cout << "Added to a list: " << list->toString()
+            << " expected: 1, 2, 3, 4, 5" << std::endl;
+  // removing an element
   list->remove(3);
-  std::cout << "removed an element: " << list->toString()
-            << "expeceted: 1, 2, 4, 5" << std::endl;
+  std::cout << "Removed an element: " << list->toString()
+            << " expected: 1, 2, 4, 5" << std::endl;
   // removing the last element
   list->remove(5);
-  std::cout << "removed the last element: " << list->toString()
-            << "expeceted: 1, 2, 4" << std::endl;
+  std::cout << "Removed the last element: " << list->toString()
+            << " expected: 1, 2, 4" << std::endl;
   // removing the first element
   list->remove(1);
-  std::cout << "removed the first element: " << list->toString()
-            << "expeceted: 2, 4" << std::endl;
-  // removing  element that is not present
+  std::cout << "Removed the first element: " << list->toString()
+            << " expected: 2, 4" << std::endl;
+  // removing an element that is not present
   list->remove(1);
-  std::cout << "removed an element tha is not present: " << list->toString()
-            << "expeceted: 2, 4" << std::endl;
+  std::cout << "Removed an element that is not present: " << list->toString()
+            << " expected: 2, 4" << std::endl;
 }
