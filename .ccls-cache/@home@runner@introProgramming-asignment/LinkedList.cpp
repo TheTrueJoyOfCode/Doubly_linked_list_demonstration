@@ -1,95 +1,87 @@
+#include "LinkedList.h"
+#include "Node.h"
 #include <string>
-struct Node {
-private:
-  int data;
-  Node *next;
-  Node *prev;
 
-public:
-Node(int data, Node *next = nullptr, Node *prev = nullptr): data(data), next(next), prev(prev) {}
-  int getData() { return this->data; }
-  void setData(int data) { this->data = data; }
-  Node *getNext() { return this->next; }
-  void setNext(Node *next) { this->next = next; }
-  Node *getPrev() { return this->prev; }
-  void setPrev(Node *prev) { this->prev = prev; }
-};
-
-class LinkedList {
-private:
-  // I could have used unique pointer to handle memory management but I wanted
-  // to use a regular pointer for this exercise
-  Node *head;
-  Node *tail;
-
-public:
-  LinkedList() : head(nullptr), tail(nullptr){}
-  void add(int data) {
-    Node *newNode = new Node(data);
-    if (this->head == nullptr) {
-      this->head = newNode;
-      this->tail = newNode;
-      
-    } else {
-      if (this->tail == nullptr) {
-        this->tail = newNode;
-        this->head->setNext(this->tail);
-        this->tail->setPrev(this->head);
-      } else {
-        tail->setNext(newNode);
-        newNode->setPrev(tail);
-        tail = newNode;
-      }
-    }
+#include "Node.h"
+// Constructor for linked list
+LinkedList::LinkedList() : head(nullptr), tail(nullptr) {}
+// Add element to linked list
+void LinkedList::add(int data) {
+  // Making the new node
+  Node *newNode = new Node(data,nullptr,nullptr);
+  // If the list is empty
+  if (this->head == nullptr) {
+    // Set the head and tail to beThe new node
+    this->head = newNode;
+    this->tail = newNode;
   }
-  int remove(int data) {
-    if (this->head == nullptr) {
-      return -1;
-    }
-    Node *current = this->head;
-    while (current != nullptr) {
-      if (current->getData() == data) {
-        Node *prev = current->getPrev();
-        Node *next = current->getNext();
-        if (next != nullptr) {
-          next->setPrev(prev);
-        }
-        if (prev != nullptr) {
-          prev->setNext(next);
-        }
-        if(current == this->tail) {
-          this->tail = prev;
-        }
-        if (current == this->head) {
-          this->head = current->getNext();
-        }
-        if (current != nullptr)
-        {
-          delete current;
-        }
-        return 1;
-      }
-      current = current->getNext();
-    }
-    return 0;
-  };
-  // to string
-  std::string toString() {
-    std::string result = "";
-    Node *current = this->head;
-    while (current != nullptr) {
-      result += std::to_string(current->getData()) + ", ";
-      current = current->getNext();
-    }
-    return result;
+  // If the list is not empty
+  else {
+    // Add new element beyond the current tail
+    tail->setNext(newNode);
+    // Set previous node of current element to previous tail
+    newNode->setPrev(tail);
+    // Set the new tail to be the new node
+    tail = newNode;
   }
-  // deconstrutor
-  ~LinkedList() {
-    Node *current = this->head;
-    while (current != nullptr) {
+}
+// Remove element from linked list
+int LinkedList::remove(int data) {
+  // If the list is empty return -1 as error
+  if (this->head == nullptr) {
+    return -1;
+  }
+  // If the list is not empty
+  Node *current = this->head;
+  // Generate through each element in the list
+  while (current != nullptr) {
+    // If the current element is the element to be removed
+    if (current->getData() == data) {
+      Node *prev = current->getPrev();
       Node *next = current->getNext();
+      // Connecting the previous and next nodes to each other
+      if (next != nullptr) {
+        next->setPrev(prev);
+      }
+      if (prev != nullptr) {
+        prev->setNext(next);
+      }
+      if (current == this->tail) {
+        this->tail = prev;
+      }
+      if (current == this->head) {
+        this->head = current->getNext();
+      }
+      // Deleting the current node
       delete current;
-      current = next;
+      // Returning one to show success
+      return 1;
     }
+    current = current->getNext();
+  }
+  // Reached the end of the list without finding element
+  return 0;
+};
+// Generates a list of elements as a string
+std::string LinkedList::toString() {
+  std::string result = "";
+  Node *current = this->head;
+  while (current != nullptr) {
+    result += std::to_string(current->getData());
+    if (current->getNext() != nullptr) {
+      result += ", ";
+    }
+    current = current->getNext();
+  }
+  return result;
+}
+// deconstrutor
+LinkedList::~LinkedList() {
+  Node *current = this->head;
+  // Iterates through and deletes each node
+  while (current != nullptr) {
+    Node *next = current->getNext();
+    delete current;
+    current = next;
   }
 };
