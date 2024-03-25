@@ -1,5 +1,7 @@
 #include "LinkedList.h"
 #include <string>
+// This class implements a doubly linked list
+//and the necessary functions forAdding and removing elements
 // linked list constructor
 LinkedList::LinkedList() : head(nullptr), tail(nullptr) {}
 // append element to link list
