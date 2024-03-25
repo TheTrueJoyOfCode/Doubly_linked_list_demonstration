@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef LLNODE_H
+#define LLNODE_H
 
 // This is a Node in a linked list.
 struct Node {
@@ -17,5 +17,4 @@ public:
     Node* getPrev() const;             // Get previous node in list
     void setPrev(Node* prev);          // Sets the previous node in list
 };
-
 #endif // NODE_H

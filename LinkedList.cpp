@@ -1,21 +1,18 @@
 #include "LinkedList.h"
-#include "Node.h"
 #include <string>
-
-#include "Node.h"
-// Constructor for linked list
+// linked list constructor
 LinkedList::LinkedList() : head(nullptr), tail(nullptr) {}
-// Add element to linked list
+// append element to link list
 void LinkedList::add(int data) {
   // Making the new node
-  Node *newNode = new Node(data,nullptr,nullptr);
-  // If the list is empty
+  LinkedListNode *newNode = new LinkedListNode(data,nullptr,nullptr);
+  // if the list is empty treat new node like root note
   if (this->head == nullptr) {
     // Set the head and tail to beThe new node
     this->head = newNode;
     this->tail = newNode;
   }
-  // If the list is not empty
+  //  if list is not empty append item to list
   else {
     // Add new element beyond the current tail
     tail->setNext(newNode);
@@ -25,20 +22,19 @@ void LinkedList::add(int data) {
     tail = newNode;
   }
 }
-// Remove element from linked list
+// Remove element from linked list  and connect  adjacent  nodes
 int LinkedList::remove(int data) {
   // If the list is empty return -1 as error
   if (this->head == nullptr) {
     return -1;
   }
-  // If the list is not empty
-  Node *current = this->head;
-  // Generate through each element in the list
+  LinkedListNode *current = this->head;
+  //  iterate through each element in the list
   while (current != nullptr) {
     // If the current element is the element to be removed
     if (current->getData() == data) {
-      Node *prev = current->getPrev();
-      Node *next = current->getNext();
+      LinkedListNode *prev = current->getPrev();
+      LinkedListNode *next = current->getNext();
       // Connecting the previous and next nodes to each other
       if (next != nullptr) {
         next->setPrev(prev);
@@ -65,7 +61,7 @@ int LinkedList::remove(int data) {
 // Generates a list of elements as a string
 std::string LinkedList::toString() {
   std::string result = "";
-  Node *current = this->head;
+  LinkedListNode *current = this->head;
   while (current != nullptr) {
     result += std::to_string(current->getData());
     if (current->getNext() != nullptr) {
@@ -77,10 +73,10 @@ std::string LinkedList::toString() {
 }
 // deconstrutor
 LinkedList::~LinkedList() {
-  Node *current = this->head;
+  LinkedListNode *current = this->head;
   // Iterates through and deletes each node
   while (current != nullptr) {
-    Node *next = current->getNext();
+    LinkedListNode *next = current->getNext();
     delete current;
     current = next;
   }

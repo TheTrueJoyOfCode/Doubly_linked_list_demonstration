@@ -1,14 +1,14 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include "Node.h"
+#include "LinkedListNode.h"
 #include <string>
 
 // LinkedList class definition
 class LinkedList {
 private:
-  Node *head; // head of linked list
-  Node *tail; // tale of linked list
+  LinkedListNode *head; // head of linked list
+  LinkedListNode *tail; // tale of linked list
 
 public:
   LinkedList();           // The constructor
@@ -16,8 +16,8 @@ public:
   void add(int data);     // Add item to link list
   int remove(int data);   // Remove item from link list
   std::string toString(); // Convert linked list to string
-  Node *getHead();        // get the head of the linked list
-  Node *getTail();        // get the tail of the linked list
+  LinkedListNode *getHead();        // get the head of the linked list
+  LinkedListNode *getTail();        // get the tail of the linked list
 };
 
 #endif // LINKEDLIST_H
