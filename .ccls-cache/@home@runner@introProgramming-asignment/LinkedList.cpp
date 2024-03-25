@@ -52,13 +52,13 @@ int LinkedList::remove(int data) {
       }
       // Deleting the current node
       delete current;
-      // Returning one to show success
-      return 1;
+      // Returning 0 to show success
+      return 0;
     }
     current = current->getNext();
   }
   // Reached the end of the list without finding element
-  return 0;
+  return -1;
 };
 // Generates a list of elements as a string
 std::string LinkedList::toString() {
